@@ -4,6 +4,6 @@ function v_t(r,E,L)
 end
 
 function v_r(r,E,L)
-    var1=sqrt(abs(2*(E-psi_itp(r)))-L^2/r^2)
+    var1=sqrt(abs(2*(E-psi_itp(r))-L^2/r^2))
     return var1
 end

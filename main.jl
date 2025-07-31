@@ -7,6 +7,7 @@ include("period_find.jl")
 include("local_iom.jl")
 include("average_coef.jl")
 include("visualizer.jl")
+include("bisection.jl")
 
 using Plots
 using LaTeXStrings
@@ -16,7 +17,7 @@ using Cubature
 using Roots
 using .SetGlobals
 
-SetGlobals.read_in("omegaCenEddie.csv")
+SetGlobals.read_in("plummer_IC.csv")
 
 #r_test=range(rmin,rmax,1000) # Test arrays
 #v_test=range(vmin,vmax,1000)
@@ -27,4 +28,4 @@ SetGlobals.read_in("omegaCenEddie.csv")
 
 #graph1 = heatmap(r_test,v_test,res,color=:tofino,size=(1500,750),title="Ntot",xlim=(0,15),ylim=(0,1.5)) # Plotting 
 
-average_coef_plot(-0.2,0.1,1.5,100)
+average_coef_plot(-0.2,0.1,2.0,150)
