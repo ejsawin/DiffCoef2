@@ -1,31 +1,39 @@
-include("set_globals.jl")
+# Necessary modules
+include("make_globals.jl")
+include("loc_vel_coef.jl")
+include("vel_calc.jl")
 include("midpoint.jl")
-include("velocities.jl")
-include("local_coef.jl")
-include("orbits.jl")
-include("period_find.jl")
-include("local_iom.jl")
-include("average_coef.jl")
-include("visualizer.jl")
-include("bisection.jl")
 
+using .MakeGlobals
 using Plots
-using LaTeXStrings
-using QuadGK
 using KernelDensity
-using Cubature
-using Roots
-using .SetGlobals
 
-SetGlobals.read_in("plummer_IC.csv")
 
-#r_test=range(rmin,rmax,1000) # Test arrays
-#v_test=range(vmin,vmax,1000)
+# Read in data
+read_file("plummer_IC.csv")
 
-#res = [log10.(Ntot(y,z)) for z in v_test, y in r_test] # Matrix 
-#res2 = [log10.(Ftot(w,o)) for o in v_test, w in r_test]
-#res3 = [log10.(Ftot(w,o)/Ntot(w,o)) for o in v_test, w in r_test]
 
-#graph1 = heatmap(r_test,v_test,res,color=:tofino,size=(1500,750),title="Ntot",xlim=(0,15),ylim=(0,1.5)) # Plotting 
+# Test
+r_=1.5
+vr=0.7
+vt=0.3
 
-average_coef_plot(-0.2,0.1,2.0,150)
+E_test=0.5(vr^2+vt^2)+psi_calc(r_)
+L_test=vt/r_
+
+println(find_locv(r_,E_test,L_test))
+
+
+
+# Graphing
+
+#r_test=exp.(range(log(rmin),log(rmax),4000))
+#v_test=exp.(range(log(vmin),log(vmax),4000))
+
+#kde1=kde((r_tab,v_tab))
+
+#graph=heatmap(r_test,v_test,F_1D,xlim=(0,4),title="Interpolated DF")
+#graph2=heatmap(r_test,v_test,N_1D,xlim=(0,4),title="Interpolated DF")
+#graph3=plot(graph,graph2,layout=(1,2))
+#display(graph3)
+#readline()
